@@ -35,6 +35,8 @@ module Apnotic
         timeout: options[:timeout]
       )
       Apnotic::Response.new(headers: response.headers, body: response.body) if response
+    rescue Errno::ETIMEDOUT
+      nil
     end
 
     def push_async(push)
